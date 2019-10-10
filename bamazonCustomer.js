@@ -52,8 +52,9 @@ function start(products) {
 
 // app will prompt user with two options
 function purchaseItem(products) {
+    var query = "SELECT * FROM products";
 
-    connection.query("SELECT * FROM products", function (err, results) {
+    connection.query(query, function (err, results) {
         if (err) throw err;
 
         inquirer
@@ -69,29 +70,42 @@ function purchaseItem(products) {
                     return choiceArray;
 
                 },
-                message: "Using the 'item_id', enter which item you'd like to purchase."
+                message: "Using the 'item_id', enter which item you'd like to purchase.",
             }, {
                 name: "choiceAmt",
                 type: "input",
                 message: "How many would you like to purchase?"
-            }]).then(function (answer) {
-                console.log(answer);
-                var chosenItem = answer.products;
+            }]).then(function (sale) {
+                var itemQty;
+                var itemPrice;
+                var itemName;
+                var productSales;
+
+
                 // take the id of the item and remove the quantity the customer wants from our stock.
-                for (var i = 0; i < results.length; i++) {
-                    if (results[i].item_id === answer.choice) {
-                        chosenItem = results[i];
+                for (var j = 0; j < results.length; j++) {
+                    if (parseInt(sale.choice) === results[j].item_id) {
+                        itemQty = results[j].stock;
+                        itemPrice = results[j].price;
+                        itemName = results[j].product_name;
                     }
                 }
-                sellItem
-                console.log(chosenItem);
-
-            })
 
 
-    })
 
+                if (parseInt(sale.choiceAmt) > itemQty) {
+                    console.log("Insufficient in stock! We have " + itemQty + " in stock. Please try again.");
+                    purchaseItem();
+                } else if (parseInt(sale.choiceAmt) <= itemQty) {
+                    console.log("You have just purchased " + sale.choiceAmt + " of " + itemName + ".");
+                    adjInv(sale.choice, sale.choiceAmt, sale.price);
+                }
+            });
+    });
 };
+
+
+
 
 // The first should ask them the ID of the product they would like to buy.
 // The second message should ask how many units of the product they would like to buy.
