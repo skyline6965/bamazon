@@ -23,4 +23,3 @@ VALUES
 (8, "Weight Set", "Sports", 200.00, 4),
 (9, "Ps4", "Tech.", 400.00, 6),
 (10, "Guitar", "Misc.", 1000.00, 2)
-

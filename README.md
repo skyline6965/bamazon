@@ -4,9 +4,8 @@
 
 ## Overview
 
-In this activity, I will be creating an Amazon-like storefront with MySQL. This app will take in orders from customers and deplete stock from the store's inventory. As a bonus task, you can program your app to track product sales across your store's departments and then provide a summary of the highest-grossing departments in the store.
+In this activity, I will be creating an Amazon-like storefront with MySQL. This app will take in orders from customers and deplete stock from the store's inventory.
 
-Make sure you save and require the MySQL and Inquirer npm packages in your homework files--your app will need them for data input and storage.
 
 ## Submission Guide
 
@@ -37,6 +36,7 @@ Having an active and healthy commit history on GitHub is important for your futu
 * We would like you to have well over 200 commits by graduation, so commit early and often!
 
 ### Submission on BCS
+
 
 * Please submit the link to the Github Repository!
 

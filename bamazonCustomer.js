@@ -1,7 +1,7 @@
 require('dotenv').config();
 var mysql = require("mysql");
 
-var password = require("./pw.js");
+var pw = require("./pw.js");
 
 var inquirer = require("inquirer");
 
@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
     user: "root",
 
     // password: process.env.mysqlpassword,
-    password: "gcvAm58076!",
+    password: pw.pw,
     database: "bamazon_db"
 });
 
@@ -55,10 +55,8 @@ function start(products) {
 // app will prompt user with two options
 function purchaseItem(products) {
     var query = "SELECT * FROM products";
-
     connection.query(query, function (err, results) {
         if (err) throw err;
-
         inquirer
             .prompt([{
                 name: "choice",
@@ -68,9 +66,7 @@ function purchaseItem(products) {
                     for (var i = 0; i < results.length; i++) {
                         choiceArray.push(results[i].item_id);
                     }
-                    // console.log(choiceArray);
                     return choiceArray;
-
                 },
                 message: "Using the 'item_id', enter which item you'd like to purchase.",
             }, {
@@ -81,10 +77,6 @@ function purchaseItem(products) {
                 var itemQty;
                 var itemPrice;
                 var itemName;
-                var productSales;
-
-
-                // take the id of the item and remove the quantity the customer wants from our stock.
                 for (var j = 0; j < results.length; j++) {
                     if (parseInt(sale.choice) === results[j].item_id) {
                         itemQty = results[j].stock;
@@ -92,9 +84,6 @@ function purchaseItem(products) {
                         itemName = results[j].product_name;
                     }
                 }
-
-
-
                 if (parseInt(sale.choiceAmt) > itemQty) {
                     console.log("--------------------------------------------------------------")
                     console.log(" ")
@@ -125,10 +114,9 @@ function adjInv(item, customerQty, stockQty, price) {
             if (err) throw err;
             console.log("The total price of your purchase is $" + totalCost)
         }
-        
     );
     readProducts();
-}
+};
 
 // The first should ask them the ID of the product they would like to buy.
 // The second message should ask how many units of the product they would like to buy.
