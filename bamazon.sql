@@ -12,33 +12,15 @@ CREATE TABLE products(
     );
     
 INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (1, "Rolex", "Acc.", 100.00, 5);
+VALUES 
+(1, "Rolex", "Acc.", 100.00, 5),
+(2, "Laptop", "Tech.", 600.00, 8),
+(3, "Tablet", "Tech.", 300.00, 7),
+(4, "TV", "Tech.", 500.00, 4),
+(5, "Dinning Table", "Furniture", 300.00, 2),
+(6, "Dinning Chairs", "Furniture", 30.00, 8),
+(7, "Backpack", "Misc.", 40.00, 10),
+(8, "Weight Set", "Sports", 200.00, 4),
+(9, "Ps4", "Tech.", 400.00, 6),
+(10, "Guitar", "Misc.", 1000.00, 2)
 
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (2, "Laptop", "Tech.", 600.00, 8);
-
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (3, "Tablet", "Tech.", 300.00, 7);
-
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (4, "TV", "Tech.", 500.00, 4);
-
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (5, "Dinning Table", "Furniture", 300.00, 2);
-
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (6, "Dinning Chairs", "Furniture", 30.00, 8);
-
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (7, "Backpack", "Misc.", 40.00, 10);
-
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (8, "Weight Set", "Sports", 200.00, 4);
-
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (9, "Ps4", "Tech.", 400.00, 6);
-
-INSERT INTO products(item_id, product_name, dept_name, price, stock)
-VALUES (10, "Guitar", "Misc.", 1000.00, 2);
-
-DESCRIBE products;

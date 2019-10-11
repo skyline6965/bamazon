@@ -1,5 +1,7 @@
-require('dotenv').config()
+require('dotenv').config();
 var mysql = require("mysql");
+
+var password = require("./pw.js");
 
 var inquirer = require("inquirer");
 
@@ -94,18 +96,39 @@ function purchaseItem(products) {
 
 
                 if (parseInt(sale.choiceAmt) > itemQty) {
+                    console.log("--------------------------------------------------------------")
+                    console.log(" ")
                     console.log("Insufficient in stock! We have " + itemQty + " in stock. Please try again.");
                     purchaseItem();
                 } else if (parseInt(sale.choiceAmt) <= itemQty) {
                     console.log("You have just purchased " + sale.choiceAmt + " of " + itemName + ".");
-                    adjInv(sale.choice, sale.choiceAmt, sale.price);
+                    adjInv(sale.choice, sale.choiceAmt, itemQty, itemPrice);
                 }
             });
     });
 };
 
 
-
+function adjInv(item, customerQty, stockQty, price) {
+    var totalCost = parseInt(customerQty) * price;
+    connection.query(
+        "UPDATE products SET ? WHERE ?",
+        [
+            {
+                stock: stockQty - parseInt(customerQty)
+            },
+            {
+                item_id: parseInt(item)
+            }
+        ],
+        function (err, response) {
+            if (err) throw err;
+            console.log("The total price of your purchase is $" + totalCost)
+        }
+        
+    );
+    readProducts();
+}
 
 // The first should ask them the ID of the product they would like to buy.
 // The second message should ask how many units of the product they would like to buy.
